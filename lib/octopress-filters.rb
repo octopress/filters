@@ -11,6 +11,13 @@ require "titlecase"
 module Octopress
   module Filters
 
+    # Returns the site's config root or '/' if the config isn't set
+    #
+    def root
+      root_url = Ink.site.config['root']
+      root_url.nil? ? '/' : File.join('/', root_url)
+    end
+
     # Escapes HTML content for XML
     def cdata_escape(input)
       input.gsub(/<!\[CDATA\[/, '&lt;![CDATA[').gsub(/\]\]>/, ']]&gt;')
@@ -117,16 +124,8 @@ module Octopress
     end
 
     module_function *instance_methods
-    public *private_instance_methods
+    public *private_instance_methods.reject!{ |m| [:root].include?(m) }
 
-    private
-
-    # Returns the site's config root or '/' if the config isn't set
-    #
-    def root
-      root_url = Ink.site.config['root']
-      root_url.nil? ? '/' : File.join('/', root_url)
-    end
   end
 end
 
