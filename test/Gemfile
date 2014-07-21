@@ -1,0 +1,6 @@
+source 'https://rubygems.org'
+
+gem 'octopress-filters', path: '../'
+gem 'pry-debugger'
+gem 'octopress-filter-tag'
+gem 'clash'
