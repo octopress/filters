@@ -1,0 +1,31 @@
+---
+---
+{% filter smartquotes %}
+"A first example"
+"A first "nested" example"
+".
+"a
+'.
+'a
+<p>He said, "'Quoted' words in a larger quote."</p>
+"I like the 70's"
+"I like the '70s"
+"I like the '70!"
+
+pre"post
+pre "post
+pre&nbsp;"post
+pre--"post
+pre--"!
+
+pre'post
+pre 'post
+pre&nbsp;'post
+pre--'post
+pre--'!
+<b>'</b>
+foo<b>'</b>
+
+<pre>"this shouldn't be curled"</pre>
+<code>"this shouldn't be curled"</code>
+{% endfilter %}

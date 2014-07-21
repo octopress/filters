@@ -2,8 +2,10 @@
 
 A set of handy liquid filters used by Octopress.
 
-- full_urls - Replace relative urls with absolute urls.
-- titlecase - Properly capitalize titles based on John Gruber's [Title Case](http://daringfireball.net/2008/05/title_case).
+- full_urls - Replace relative urls with absolute urls (searches for `href` and `src` properties).
+- full_url - Replace a single url in a string.
+- titlecase - Properly capitalize titles with John Gruber’s [Title Case](http://daringfireball.net/2008/05/title_case).
+- smartquotes - Smartly curl your quotation marks with John Gruber’s [Smarty Pants](http://daringfireball.net/projects/smartypants/).
 - unorphan - Insert a non-breaking space between the last two words in a title.
 - sluggify - Replaces all non-word characters in a string with dashes.
 - classify - An alias for sluggify (seems appropriate when working with CSS class names).
@@ -37,16 +39,26 @@ Next add it to your gems list in Jekyll's `_config.yml`
 
 ### Full urls
 
-If you're working on an RSS feed, you'll need to be sure all of your relative urls are converted to full urls. In that case, when
-rendering the content of a page, just do this:
+Any relative links in your site will be expanded with the `url` configuration in Jekyll's `_config.yml`. This filter only affects urls
+beginning with `/` inside of `href` or `src` attributes.
 
     {{ post.content | full_urls }}
 
-Now any relative links in your site will be expanded with the `url` configuration in Jekyll's `_config.yml`.
+You might use this if you're working on an RSS feed, you'll need to be sure all relative urls in your content are expanded to full urls.
+
+### Full url
+
+This filter prepends input with the `url` configuration in Jekyll's `_config.yml`.
+
+    {{ post.url | full_url }}
 
 ### Titlecase
 
     {{ post.title | titlecase }}  //=> This Is a Properly Capitalized Title
+
+### Smartquote
+
+    {{ post.content | smartquotes }}
 
 ### Unorphan
 

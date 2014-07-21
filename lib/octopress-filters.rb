@@ -1,11 +1,12 @@
 require "octopress-filters/version"
-require "octopress-filters/utils"
 
 unless defined? Octopress::Ink
   require "octopress-filters/generator"
 end
 
 require "jekyll"
+require "rubypants-unicode"
+require "titlecase"
 
 module Octopress
   module Filters
@@ -18,7 +19,11 @@ module Octopress
     # Returns a title cased string based on John Gruber's title case 
     # Info: http://daringfireball.net/2008/08/title_case_update
     def titlecase(input)
-      Octopress::Utils.titlecase!(input)
+      input.titlecase
+    end
+
+    def smartquotes(input)
+      RubyPants.new(input).to_html
     end
 
     # Formats a string for use as a css classname, removing illegal characters
@@ -68,7 +73,7 @@ module Octopress
     #
     def expand_urls(input, url=nil)
       url ||= root
-      input.gsub /(\s+(href|src|rel)\s*=\s*["|']{1})(\/[^\/>]{1}[^\"'>]*)/ do
+      input.gsub /(\s+(href|src)\s*=\s*["|']{1})(\/[^\/>]{1}[^\"'>]*)/ do
         $1 + expand_url($3, url)
       end
     end
