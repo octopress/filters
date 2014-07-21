@@ -3,7 +3,8 @@
 A set of handy liquid filters used by Octopress.
 
 - full_urls - Replace relative urls with absolute urls (searches for `href` and `src` properties).
-- full_url - Replace a single url in a string.
+- full_url - Replace a relative url with an absolute url.
+- canonical_url - Convert a url to the proper canonical version.
 - titlecase - Properly capitalize titles with John Gruber’s [Title Case](http://daringfireball.net/2008/05/title_case).
 - smartquotes - Smartly curl your quotation marks with John Gruber’s [Smarty Pants](http://daringfireball.net/projects/smartypants/).
 - unorphan - Insert a non-breaking space between the last two words in a title.
@@ -51,6 +52,14 @@ You might use this if you're working on an RSS feed, you'll need to be sure all 
 This filter prepends input with the `url` configuration in Jekyll's `_config.yml`.
 
     {{ post.url | full_url }}
+
+### Canonical url
+
+This filter expands the url to be a full url, then removes "index.html" if it is present. Here are some examples.
+
+    {{ "about/index.html" | canonical_url }}  //=> http://example.com/about/
+    {{ "about.html" | canonical_url }}        //=> http://example.com/about.html
+    {{ "/" | canonical_url }}                 //=> http://example.com/
 
 ### Titlecase
 

@@ -48,34 +48,10 @@ module Octopress
       input.sub(/\s+(\S+)\s*$/, '&nbsp;\1')
     end
 
-    # Prepends input with a url fragment
+    # Convert url input into a standard canonical url
     #
-    # input - An absolute url, e.g. /images/awesome.gif
-    # url   - The fragment to prepend the input, e.g. /blog
-    #
-    # Returns the modified url, e.g /blog
-    #
-    def expand_url(input, url=nil)
-      url ||= root
-      if input =~ /^#{url}/
-        input
-      else
-        File.join(url, input)
-      end
-    end
-
-    # Prepend all absolute urls with a url fragment
-    #
-    # input - The content of a page or post
-    # url   - The fragment to prepend absolute urls
-    #
-    # Returns input with modified urls
-    #
-    def expand_urls(input, url=nil)
-      url ||= root
-      input.gsub /(\s+(href|src)\s*=\s*["|']{1})(\/[^\/>]{1}[^\"'>]*)/ do
-        $1 + expand_url($3, url)
-      end
+    def canonical_url(input)
+      full_url(input).downcase.sub(/index\.html/, '')
     end
 
     # Prepend all urls with the full site url
@@ -107,6 +83,36 @@ module Octopress
         raise IOError.new "Could not expand url in #{input}: Please add your site's published url to your _config.yml, eg url: http://example.com/"
       else
         expand_url(input, url)
+      end
+    end
+
+    # Prepends input with a url fragment
+    #
+    # input - An absolute url, e.g. /images/awesome.gif
+    # url   - The fragment to prepend the input, e.g. /blog
+    #
+    # Returns the modified url, e.g /blog
+    #
+    def expand_url(input, url=nil)
+      url ||= root
+      if input =~ /^#{url}/
+        input
+      else
+        File.join(url, input)
+      end
+    end
+
+    # Prepend all absolute urls with a url fragment
+    #
+    # input - The content of a page or post
+    # url   - The fragment to prepend absolute urls
+    #
+    # Returns input with modified urls
+    #
+    def expand_urls(input, url=nil)
+      url ||= root
+      input.gsub /(\s+(href|src)\s*=\s*["|']{1})(\/[^\/>]{1}[^\"'>]*)/ do
+        $1 + expand_url($3, url)
       end
     end
 
