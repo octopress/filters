@@ -1,10 +1,10 @@
 require "octopress-filters/version"
 
-unless defined? Octopress::Ink
-  require "octopress-filters/generator"
+# Octopress Ink has its own hooks.
+unless defined? Octopress.site
+  require "octopress-filters/hooks"
 end
 
-require "jekyll"
 require "rubypants-unicode"
 require "titlecase"
 
@@ -14,7 +14,7 @@ module Octopress
     # Returns the site's config root or '/' if the config isn't set
     #
     def root
-      root_url = Ink.site.config['root']
+      root_url = Octopress.site.config['root']
       root_url.nil? ? '/' : File.join('/', root_url)
     end
 
@@ -69,7 +69,7 @@ module Octopress
     # e.g. /images/awesome.gif => http://example.com/images/awesome.gif
     #
     def full_urls(input)
-      url = Ink.site.config['url']
+      url = Octopress.site.config['url']
       if url.nil?
         raise IOError.new "Could not expand urls: Please add your published url to your _config.yml, eg url: http://example.com/"
       else
@@ -85,7 +85,7 @@ module Octopress
     # e.g. /images/awesome.gif => http://example.com/images/awesome.gif
     #
     def full_url(input)
-      url = Ink.site.config['url']
+      url = Octopress.site.config['url']
       if url.nil?
         raise IOError.new "Could not expand url in #{input}: Please add your site's published url to your _config.yml, eg url: http://example.com/"
       else

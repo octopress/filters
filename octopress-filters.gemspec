@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Octopress::Tags::Filters::VERSION
   spec.authors       = ["Brandon Mathis"]
   spec.email         = ["brandon@imathis.com"]
-  spec.summary       = %q{Return tag renders a variable with some nice features}
-  spec.description   = %q{Return tag renders a variable with some nice features}
+  spec.summary       = %q{A set of handy liquid filters used by Octopress}
+  spec.description   = %q{A set of handy liquid filters used by Octopress}
   spec.homepage      = "https://github.com/octopress/filters"
   spec.license       = "MIT"
 
@@ -21,6 +21,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "jekyll"
   spec.add_runtime_dependency "rubypants-unicode"
   spec.add_runtime_dependency "titlecase"
+  spec.add_runtime_dependency "octopress-hooks", "~> 2.0"
 
   spec.add_development_dependency "bundler", "~> 1.6"
   spec.add_development_dependency "rake"
