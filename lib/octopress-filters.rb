@@ -1,6 +1,5 @@
 require "octopress-filters/version"
 
-# Octopress Ink has its own hooks.
 unless defined? Octopress.site
   require "octopress-filters/hooks"
 end
