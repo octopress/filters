@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.1.2 - 2014-07-26
+
+- Replaced octopress-hooks with something simpler
+
 ### 1.1.1 - 2014-07-24
 
 - Now using octopress-hooks for access to Jekyll site.
