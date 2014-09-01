@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.2.0 - 2014-08-31
+
+- Added `strip_url_protocol` which converts `http://bog.com` to `blog.com`.
+
 ### 1.1.2 - 2014-07-26
 
 - Replaced octopress-hooks with something simpler

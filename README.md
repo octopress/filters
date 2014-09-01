@@ -12,6 +12,7 @@ A set of handy liquid filters used by Octopress.
 - classify - An alias for sluggify (seems appropriate when working with CSS class names).
 - compact_newlines - Compact groups of empty lines into one, because Liquid templates have lots of whitespace.
 - join_lines - Remove all new lines, joining each line with a separator. (defaults to a space).
+- strip_url_protocol - Remove the protocol before a url, e.g. `http://` or `https://`.
 
 [![Build Status](https://travis-ci.org/octopress/filters.svg)](https://travis-ci.org/octopress/filters)
 [![Gem Version](http://img.shields.io/gem/v/octopress-filters.svg)](https://rubygems.org/gems/octopress-filters)
@@ -91,6 +92,11 @@ This filter expands the url to be a full url, then removes "index.html" if it is
     <head>
       <title>{{ page_title | join_lines: " - " }}</title>
       …
+
+### Strip url protocol
+
+    {{ site.url }}                        # https://some-site.com/
+    {{ site.url | strip_url_protocol }}   # some-site.com/
 
 ## Contributing
 

@@ -1,0 +1,6 @@
+---
+---
+{{ site.url | strip_url_protocol }}
+{% filter strip_url_protocol %}
+https://foo.bar.com/goggles
+{% endfilter %}

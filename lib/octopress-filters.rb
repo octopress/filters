@@ -17,6 +17,14 @@ module Octopress
       root_url.nil? ? '/' : File.join('/', root_url)
     end
 
+    def site_url
+      @url ||= begin
+        Octopress.site.config['url']
+      rescue
+        raise IOError.new "Please add your site's published url to your _config.yml, eg url: http://example.com/"
+      end
+    end
+
     # Escapes HTML content for XML
     def cdata_escape(input)
       input.gsub(/<!\[CDATA\[/, '&lt;![CDATA[').gsub(/\]\]>/, ']]&gt;')
@@ -68,12 +76,7 @@ module Octopress
     # e.g. /images/awesome.gif => http://example.com/images/awesome.gif
     #
     def full_urls(input)
-      url = Octopress.site.config['url']
-      if url.nil?
-        raise IOError.new "Could not expand urls: Please add your published url to your _config.yml, eg url: http://example.com/"
-      else
-        expand_urls(input, url)
-      end
+      expand_urls(input, site_url)
     end
     
     # Prepend a url with the full site url
@@ -84,12 +87,7 @@ module Octopress
     # e.g. /images/awesome.gif => http://example.com/images/awesome.gif
     #
     def full_url(input)
-      url = Octopress.site.config['url']
-      if url.nil?
-        raise IOError.new "Could not expand url in #{input}: Please add your site's published url to your _config.yml, eg url: http://example.com/"
-      else
-        expand_url(input, url)
-      end
+      expand_url(input, site_url)
     end
 
     # Prepends input with a url fragment
@@ -120,6 +118,10 @@ module Octopress
       input.gsub /(\s+(href|src)\s*=\s*["|']{1})(\/[^\/>]{1}[^\"'>]*)/ do
         $1 + expand_url($3, url)
       end
+    end
+
+    def strip_url_protocol(input)
+      input.sub(/\w+?:\/\//,'')
     end
 
     module_function *instance_methods
