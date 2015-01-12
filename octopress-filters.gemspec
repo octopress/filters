@@ -5,7 +5,7 @@ require 'octopress-filters/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "octopress-filters"
-  spec.version       = Octopress::Tags::Filters::VERSION
+  spec.version       = Octopress::Filters::VERSION
   spec.authors       = ["Brandon Mathis"]
   spec.email         = ["brandon@imathis.com"]
   spec.summary       = %q{A set of handy liquid filters used by Octopress}
