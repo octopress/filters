@@ -133,3 +133,14 @@ end
 
 
 Liquid::Template.register_filter Octopress::Filters
+
+if defined? Octopress::Docs
+  Octopress::Docs.add({
+    name:        "Octopress Filters",
+    gem:         "octopress-filters",
+    version:     Octopress::Filters::VERSION,
+    description: "A set of nice liquid filters used by Octopress",
+    path:        File.expand_path(File.join(File.dirname(__FILE__), "../")),
+    source_url:  "https://github.com/octopress/filters"
+  })
+end

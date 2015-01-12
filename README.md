@@ -20,22 +20,24 @@ A set of handy liquid filters used by Octopress.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+If you're using bundler add this gem to your site's Gemfile in the `:jekyll_plugins` group:
 
-    gem 'octopress-filters'
+    group :jekyll_plugins do
+      gem 'octopress-filters'
+    end
 
-And then execute:
+Then install the gem with Bundler
 
     $ bundle
 
-Or install it yourself as:
+To install manually without bundler:
 
     $ gem install octopress-filters
 
-Next add it to your gems list in Jekyll's `_config.yml`
+Then add the gem to your Jekyll configuration.
 
     gems:
-      - octopress-filters
+      -octopress-filters
 
 ## Examples
 
@@ -44,7 +46,9 @@ Next add it to your gems list in Jekyll's `_config.yml`
 Any relative links in your site will be expanded with the `url` configuration in Jekyll's `_config.yml`. This filter only affects urls
 beginning with `/` inside of `href` or `src` attributes.
 
-    {{ post.content | full_urls }}
+```
+{{ post.content | full_urls }}
+```
 
 You might use this if you're working on an RSS feed, you'll need to be sure all relative urls in your content are expanded to full urls.
 
@@ -52,51 +56,70 @@ You might use this if you're working on an RSS feed, you'll need to be sure all 
 
 This filter prepends input with the `url` configuration in Jekyll's `_config.yml`.
 
-    {{ post.url | full_url }}
+```
+{{ post.url | full_url }}
+```
 
 ### Canonical url
 
 This filter expands the url to be a full url, then removes "index.html" if it is present. Here are some examples.
 
-    {{ "about/index.html" | canonical_url }}  //=> http://example.com/about/
-    {{ "about.html" | canonical_url }}        //=> http://example.com/about.html
-    {{ "/" | canonical_url }}                 //=> http://example.com/
+```
+{{ "about/index.html" | canonical_url }}  //=> http://example.com/about/
+{{ "about.html" | canonical_url }}        //=> http://example.com/about.html
+{{ "/" | canonical_url }}                 //=> http://example.com/
+
+```
 
 ### Titlecase
 
-    {{ post.title | titlecase }}  //=> This Is a Properly Capitalized Title
+```
+{{ post.title | titlecase }}  //=> This Is a Properly Capitalized Title
+```
 
 ### Smartquote
 
-    {{ post.content | smartquotes }}
+```
+{{ post.content | smartquotes }}
+```
 
 ### Unorphan
 
-    {{ post.title | unorphan }}  //=> This Is a Properly Capitalized&nbsp;Title
+```
+{{ post.title | unorphan }}  //=> This Is a Properly Capitalized&nbsp;Title
+```
 
 ### Sluggify/Classify
 
-    <article class="{{ post.class | classify }}">
+```
+<article class="{{ post.class | classify }}">
+```
 
 ### Compact newlines
 
-    {{ content | compact_newlines }}
+```
+{{ content | compact_newlines }}
+```
 
 ### Join lines
 
-    {% capture page_title %}
-    {{ page.title }}
-    {{ site.header.title }}
-    {% endcapture %}
+```
+{% capture page_title %}
+{{ page.title }}
+{{ site.header.title }}
+{% endcapture %}
 
-    <head>
-      <title>{{ page_title | join_lines: " - " }}</title>
-      …
+<head>
+  <title>{{ page_title | join_lines: " - " }}</title>
+  …
+```
 
 ### Strip url protocol
 
-    {{ site.url }}                        # https://some-site.com/
-    {{ site.url | strip_url_protocol }}   # some-site.com/
+```
+{{ site.url }}                        # https://some-site.com/
+{{ site.url | strip_url_protocol }}   # some-site.com/
+```
 
 ## Contributing
 

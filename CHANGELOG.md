@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.2.1 - 2015-01-11
+
+- Added support for Octopress docs
+
 ### 1.2.0 - 2014-08-31
 
 - Added `strip_url_protocol` which converts `http://bog.com` to `blog.com`.
