@@ -13,15 +13,15 @@ module Octopress
     # Returns the site's config root or '/' if the config isn't set
     #
     def root
-      root_url = Octopress.site.config['root']
-      root_url.nil? ? '/' : File.join('/', root_url)
+      baseurl = Octopress.site.config['baseurl'] || Octopress.site.config['root']
+      baseurl.nil? ? '/' : File.join('/', baseurl)
     end
 
     def site_url
       @url ||= begin
-        Octopress.site.config['url']
+        File.join(Octopress.site.config['url'], root)
       rescue
-        raise IOError.new "Please add your site's published url to your _config.yml, eg url: http://example.com/"
+        raise IOError.new "Please add your site's published url to your _config.yml, eg url: http://example.com"
       end
     end
 
@@ -65,7 +65,7 @@ module Octopress
     # Convert url input into a standard canonical url
     #
     def canonical_url(input)
-      full_url(input).downcase.sub(/index\.html/, '')
+      full_url(input).downcase.sub(/index\.\w+$/i, '')
     end
 
     # Prepend all urls with the full site url
@@ -99,10 +99,19 @@ module Octopress
     #
     def expand_url(input, url=nil)
       url ||= root
-      if input =~ /^#{url}/
+      url = if input =~ /^#{url}/
         input
       else
         File.join(url, input)
+      end
+
+      # If url has a file.extension
+      if url =~ /\.\w+$/
+        url
+      else
+        # The url ends with a directory
+        # Add trailing slash if necessary
+        File.join(url, '/')
       end
     end
 
