@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.2.2 - 2015-01-23
+
+- Added support for baseurl
+
 ### 1.2.1 - 2015-01-11
 
 - Added support for Octopress docs
