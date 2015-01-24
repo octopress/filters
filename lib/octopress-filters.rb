@@ -10,11 +10,14 @@ require "titlecase"
 module Octopress
   module Filters
 
-    # Returns the site's config root or '/' if the config isn't set
+    # Returns the site's baseurl or '/' if the config isn't set
     #
     def root
-      baseurl = Octopress.site.config['baseurl'] || Octopress.site.config['root']
       baseurl.nil? ? '/' : File.join('/', baseurl)
+    end
+
+    def baseurl
+      Octopress.site.config['baseurl'] || Octopress.site.config['root']
     end
 
     def site_url
@@ -52,6 +55,11 @@ module Octopress
       input.gsub(/\n{2,}/, "\n").gsub(/^ +\n/,"")
     end
 
+    # Join url fragments
+    def join_url(*input)
+      smart_slash(File.join(input))
+    end
+
     # Join newlines 
     def join_lines(input, separator='')
       compact_newlines(input).strip.gsub(/\s*\n\s*/, separator)
@@ -76,7 +84,17 @@ module Octopress
     # e.g. /images/awesome.gif => http://example.com/images/awesome.gif
     #
     def full_urls(input)
-      expand_urls(input, site_url)
+      expand_urls(strip_baseurls(input), site_url)
+    end
+
+    # If a baseurl has been manually added to a url,
+    # this ensures it isn't added twice
+    def strip_baseurls(input)
+      if baseurl
+        input.gsub /(\s+(href|src|poster)\s*=\s*["|'])(\/#{baseurl})/, '\1'
+      else
+        input
+      end
     end
     
     # Prepend a url with the full site url
@@ -99,18 +117,22 @@ module Octopress
     #
     def expand_url(input, url=nil)
       url ||= root
+
       url = if input.start_with?("http", url)
         input
       else
         File.join(url, input)
       end
 
-      # Ensure a trailing slash if a url ends with a directory
-      if !(url =~ /\.\w+$/)
-        url = File.join(url, '/')
-      end
+      smart_slash(url)
+    end
 
-      url
+    # Ensure a trailing slash if a url ends with a directory
+    def smart_slash(input)
+      if !(input =~ /\.\w+$/)
+        input = File.join(input, '/')
+      end
+      input
     end
 
     # Prepend all absolute urls with a url fragment
@@ -122,7 +144,7 @@ module Octopress
     #
     def expand_urls(input, url=nil)
       url ||= root
-      input.gsub /(\s+(href|src|poster)\s*=\s*["|']{1})(\/[^\/>]{1}[^\"'>]*)/ do
+      input.gsub /(\s+(href|src|poster)\s*=\s*["|'])(\/[^\/][^"'>]*)/ do
         $1 + expand_url($3, url)
       end
     end

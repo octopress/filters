@@ -1,7 +1,8 @@
 ---
 ---
+{{ site.url | join_url: site.baseurl }}
 {% filter full_urls %}
-{{ site.url | full_url }}
+<a href="/{{ site.baseurl }}/stuff">Stuff</a>
 <a href="/about">About</a>
 <script src="/javascripts/foo.js"></script>
 {% endfilter %}
