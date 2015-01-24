@@ -62,8 +62,8 @@ module Octopress
       input.sub(/\s+(\S+)\s*$/, '&nbsp;\1')
     end
 
-    # Convert url input into a standard canonical url
-    #
+    # Convert url input into a standard canonical url by expanding urls and
+    # removing url fragments ending with `index.[ext]`
     def canonical_url(input)
       full_url(input).downcase.sub(/index\.\w+$/i, '')
     end
@@ -99,20 +99,21 @@ module Octopress
     #
     def expand_url(input, url=nil)
       url ||= root
-      url = if input =~ /^#{url}/
+      url = if input.start_with?("http", url)
         input
       else
         File.join(url, input)
       end
 
-      # If url has a file.extension
-      if url =~ /\.\w+$/
-        url
-      else
-        # The url ends with a directory
+      # Ensure a trailing slash if a url:
+      # - is a site url, eg: http://site.com
+      # - or ends with a directory
+      if !(url =~ /\.\w+$/) || url =~ /:\/\/[^\/]+$/
         # Add trailing slash if necessary
-        File.join(url, '/')
+        url = File.join(url, '/')
       end
+
+      url
     end
 
     # Prepend all absolute urls with a url fragment
@@ -124,7 +125,7 @@ module Octopress
     #
     def expand_urls(input, url=nil)
       url ||= root
-      input.gsub /(\s+(href|src)\s*=\s*["|']{1})(\/[^\/>]{1}[^\"'>]*)/ do
+      input.gsub /(\s+(href|src|poster)\s*=\s*["|']{1})(\/[^\/>]{1}[^\"'>]*)/ do
         $1 + expand_url($3, url)
       end
     end

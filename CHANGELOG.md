@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.2.3 - 2015-01-23
+
+- Full urls will end with trailing slashes when appropriate
+
 ### 1.2.2 - 2015-01-23
 
 - Added support for baseurl
