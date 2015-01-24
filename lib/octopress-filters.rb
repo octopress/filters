@@ -105,11 +105,8 @@ module Octopress
         File.join(url, input)
       end
 
-      # Ensure a trailing slash if a url:
-      # - is a site url, eg: http://site.com
-      # - or ends with a directory
-      if !(url =~ /\.\w+$/) || url =~ /:\/\/[^\/]+$/
-        # Add trailing slash if necessary
+      # Ensure a trailing slash if a url ends with a directory
+      if !(url =~ /\.\w+$/)
         url = File.join(url, '/')
       end
 

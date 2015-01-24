@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.2.4 - 2015-01-23
+
+- Simple domains won't end in trailing slashes (eg: http://example.com doesn't need a trailing slash).
+
 ### 1.2.3 - 2015-01-23
 
 - Full urls will end with trailing slashes when appropriate
