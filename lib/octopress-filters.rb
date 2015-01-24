@@ -90,7 +90,7 @@ module Octopress
     # If a baseurl has been manually added to a url,
     # this ensures it isn't added twice
     def strip_baseurls(input)
-      if baseurl
+      if !baseurl.empty?
         input.gsub /(\s+(href|src|poster)\s*=\s*["|'])(\/#{baseurl})/, '\1'
       else
         input

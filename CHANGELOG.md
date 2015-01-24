@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.2.6 - 2015-01-24
+
+- Fix: Baseurl expansion no longer breaks root relative URLs.
+
 ### 1.2.5 - 2015-01-24
 
 - New: join_url filter, works like File.join.
