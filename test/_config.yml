@@ -4,6 +4,7 @@ email: your-email@domain.com
 baseurl: project
 url: "http://yourdomain.com"
 timezone: UTC
+excerpt_separator: <!--more-->
 
 exclude:
   - Gemfile*

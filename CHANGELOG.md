@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.3.0 - 2015-02-08
+
+- New: Added excerpted state to post data, e.g. {{ post.excerpted }} # true/false
+
 ### 1.2.6 - 2015-01-24
 
 - Fix: Baseurl expansion no longer breaks root relative URLs.

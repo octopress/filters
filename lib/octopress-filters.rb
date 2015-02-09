@@ -1,14 +1,12 @@
 require "octopress-filters/version"
-
-unless defined? Octopress.site
-  require "octopress-filters/hooks"
-end
-
+require "octopress-filters/hooks"
 require "rubypants-unicode"
 require "titlecase"
 
 module Octopress
   module Filters
+    attr_accessor :site
+    @site = {}
 
     # Returns the site's baseurl or '/' if the config isn't set
     #
@@ -17,12 +15,12 @@ module Octopress
     end
 
     def baseurl
-      Octopress.site.config['baseurl'] || Octopress.site.config['root']
+      Octopress::Filters.site.config['baseurl'] || Octopress::Filters.site.config['root']
     end
 
     def site_url
       @url ||= begin
-        File.join(Octopress.site.config['url'], root)
+        File.join(Octopress::Filters.site.config['url'], root)
       rescue
         raise IOError.new "Please add your site's published url to your _config.yml, eg url: http://example.com"
       end
@@ -155,6 +153,7 @@ module Octopress
 
     module_function *instance_methods
     public *private_instance_methods.reject!{ |m| [:root].include?(m) }
+
 
   end
 end
