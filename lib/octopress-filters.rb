@@ -6,7 +6,6 @@ require "titlecase"
 module Octopress
   module Filters
     attr_accessor :site
-    @site = {}
 
     # Returns the site's baseurl or '/' if the config isn't set
     #
