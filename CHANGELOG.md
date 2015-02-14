@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.3.1 - 2015-02-14
+
+- Fix: issue with access to site instance.
+
 ### 1.3.0 - 2015-02-08
 
 - New: Added excerpted state to post data, e.g. {{ post.excerpted }} # true/false
