@@ -7,6 +7,15 @@ module Octopress
   module Filters
     attr_accessor :site
 
+    # If filters are called before hooks, use Octopress.site if available
+    def site
+      if defined?(Octopress.site)
+        Octopress.site
+      else
+        @site
+      end
+    end
+      
     # Returns the site's baseurl or '/' if the config isn't set
     #
     def root

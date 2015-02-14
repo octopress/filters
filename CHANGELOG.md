@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.3.2 - 2015-02-14
+
+- Fix: Ensure site instance is available before hooks trigger.
+
 ### 1.3.1 - 2015-02-14
 
 - Fix: issue with access to site instance.
