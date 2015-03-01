@@ -79,7 +79,7 @@ module Octopress
     # Convert url input into a standard canonical url by expanding urls and
     # removing url fragments ending with `index.[ext]`
     def canonical_url(input)
-      full_url(input).downcase.sub(/index\.\w+$/i, '')
+      full_url(input).sub(/index\.\w+$/i, '')
     end
 
     # Prepend all urls with the full site url
