@@ -1,5 +1,9 @@
 # Changelog
 
+### 1.3.3 - 2015-02-28
+
+- Minor Change: Do not downcased canonical URLs as authors may not have control over URL case.
+
 ### 1.3.2 - 2015-02-14
 
 - Fix: Ensure site instance is available before hooks trigger.
