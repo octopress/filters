@@ -159,8 +159,15 @@ module Octopress
       input.sub(/\w+?:\/\//,'')
     end
 
+    # Removes protocol, the first trailing slash and everything after
+    #  e.g. https://foo.com/bar -> foo.com
+    #
+    def main_url(input)
+      strip_url_protocol(input).split('/').first
+    end
+
     module_function *instance_methods
-    public *private_instance_methods.reject!{ |m| [:root].include?(m) }
+    public *private_instance_methods.reject!{ |m| [:site, :root, :baseurl, :strip_baseurls, :site_url].include?(m) }
 
 
   end
