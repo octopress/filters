@@ -1,5 +1,9 @@
 # Octopress Filters
 
+[![Build Status](https://travis-ci.org/octopress/filters.svg)](https://travis-ci.org/octopress/filters)
+[![Gem Version](http://img.shields.io/gem/v/octopress-filters.svg)](https://rubygems.org/gems/octopress-filters)
+[![License](http://img.shields.io/:license-mit-blue.svg)](http://octopress.mit-license.org)
+
 A set of handy liquid filters used by Octopress.
 
 - full_urls - Replace relative URLs with absolute URLs (searches for `href` and `src` properties).
@@ -15,10 +19,6 @@ A set of handy liquid filters used by Octopress.
 - strip_url_protocol - Remove the protocol before a URL, e.g. `http://` or `https://`.
 
 Also, not a filter, but this adds `excerpted` (true/false) to post's data. Meaning you can use `{% if post.excerpted %}` in a post loop.
-
-[![Build Status](https://travis-ci.org/octopress/filters.svg)](https://travis-ci.org/octopress/filters)
-[![Gem Version](http://img.shields.io/gem/v/octopress-filters.svg)](https://rubygems.org/gems/octopress-filters)
-[![License](http://img.shields.io/:license-mit-blue.svg)](http://octopress.mit-license.org)
 
 ## Installation
 
