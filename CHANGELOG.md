@@ -1,8 +1,13 @@
 # Changelog
 
+### 1.4.0 - 2015-08-31
+
+- Added support for Jekyll 3 with Jekyll::Hooks.
+- Minor: Added `main_url` filter which converts "https://foo.com/bar" to "foo.com"
+
 ### 1.3.3 - 2015-02-28
 
-- Minor Change: Do not downcased canonical URLs as authors may not have control over URL case.
+- Minor Change: Do not downcase canonical URLs as authors may not have control over URL case.
 
 ### 1.3.2 - 2015-02-14
 
